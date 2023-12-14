@@ -10,8 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64522458376264ad8beeaaef77add2e8, type: 3}
-  m_Name: Hood 3
+  m_Name: Torso 1
   m_EditorClassIdentifier: 
-  pieceName: Hood 3
-  pieceSprite: {fileID: 21300000, guid: ae2d3e3bacfacde4981510b116293dba, type: 3}
-  pieceLocation: 0
+  pieceName: Torso 1
+  pieceSprite: {fileID: 21300000, guid: 215dd6c48c732d744aecd29e7fecbbfa, type: 3}
+  buyPrice: 100
+  sellPrice: 50
+  owned: 1
+  equipped: 1
+  pieceType: 1

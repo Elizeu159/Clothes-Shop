@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pieceName: Hood 5
   pieceSprite: {fileID: 21300000, guid: 20eb058aea3c3a744bb5d47a1610550a, type: 3}
-  pieceLocation: 0
+  buyPrice: 100
+  sellPrice: 50
+  owned: 1
+  equipped: 0
+  pieceType: 0

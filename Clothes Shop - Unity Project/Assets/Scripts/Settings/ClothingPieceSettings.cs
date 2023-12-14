@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum ClothingLocations { Hood, Torso, Pelvis, LeftShoulder, RightShoulder, LeftWrist, RightWrist, LeftBoot, RightBoot, LeftLeg, RightLeg };
+public enum ClothingPieceTypes { Hood, Torso, Pelvis, LeftShoulder, RightShoulder, LeftWrist, RightWrist, LeftBoot, RightBoot, LeftLeg, RightLeg };
 
 [CreateAssetMenu(fileName = "Clothing", menuName = "ScriptableObjects/ClothingScriptableObject")]
 public class ClothingPieceSettings : ScriptableObject
@@ -11,7 +11,8 @@ public class ClothingPieceSettings : ScriptableObject
     public int buyPrice = 100;
     public int sellPrice = 50;
 
-    public ClothingLocations pieceLocation;
+    public bool owned;
+    public bool equipped;
 
-    
+    public ClothingPieceTypes pieceType;
 }
