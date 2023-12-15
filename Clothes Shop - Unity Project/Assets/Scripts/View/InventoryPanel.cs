@@ -22,6 +22,16 @@ public class InventoryPanel : MonoBehaviour
         openCloseBttn.onClick.AddListener(ChangeIventoryActiveState);
     }
 
+    private void OnEnable()
+    {
+        ClothingStaticEvents.OnShopStateChanged += OnShopStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        ClothingStaticEvents.OnShopStateChanged -= OnShopStateChanged;
+    }
+
     public void ShowOwnedPiecesOfType(ClothingPieceTypes clothing)
     {
         clothingsToDisplay.Clear();
@@ -56,9 +66,16 @@ public class InventoryPanel : MonoBehaviour
         }
     }
 
+    private void OnShopStateChanged(bool state)
+    {
+        openCloseBttn.gameObject.SetActive(!state);
+    }
+
     private void ChangeIventoryActiveState()
     {
         bool isTurnedOn = inventoryVisualizationHolder.activeInHierarchy;
+
+        ClothingStaticEvents.OnInventoryStateChanged(!isTurnedOn);
 
         inventoryVisualizationHolder.SetActive(!isTurnedOn);
     }

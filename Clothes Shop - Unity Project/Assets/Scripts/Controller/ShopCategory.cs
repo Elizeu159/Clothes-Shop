@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-public class InventoryCategory : GeneralCategory
+public class ShopCategory : GeneralCategory
 {
-    public InventoryPanel inventory;
+    public ShopPanel shopPanel;
 
     protected override void Awake()
     {
@@ -26,6 +26,6 @@ public class InventoryCategory : GeneralCategory
     protected override void OnChangedToggleState(bool state)
     {
         base.OnChangedToggleState(state);
-        inventory.ShowOwnedPiecesOfType(clothingType);
+        shopPanel.ShowPiecesOfType(clothingType);
     }
 }

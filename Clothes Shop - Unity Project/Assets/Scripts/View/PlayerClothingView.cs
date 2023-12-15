@@ -7,19 +7,16 @@ public class PlayerClothingView : MonoBehaviour
     public SpriteRenderer hoodRenderer;
     public SpriteRenderer torsoRenderer;
 
-    private void Start()
-    {
-        
-    }
-
     private void OnEnable()
     {
         ClothingStaticEvents.OnRequestedClothingEquip += OnRequestedClothingEquip;
+        ClothingStaticEvents.OnRequestedClothingTry += OnRequestedClothingTry;
     }
 
     private void OnDisable()
     {
         ClothingStaticEvents.OnRequestedClothingEquip -= OnRequestedClothingEquip;
+        ClothingStaticEvents.OnRequestedClothingTry -= OnRequestedClothingTry;
     }
 
     public void VisualizePiece(ClothingPieceSettings clothingPiece)
@@ -35,6 +32,11 @@ public class PlayerClothingView : MonoBehaviour
     }
 
     private void OnRequestedClothingEquip(ClothingPieceSettings clothingPiece)
+    {
+        VisualizePiece(clothingPiece);
+    }
+
+    private void OnRequestedClothingTry(ClothingPieceSettings clothingPiece)
     {
         VisualizePiece(clothingPiece);
     }

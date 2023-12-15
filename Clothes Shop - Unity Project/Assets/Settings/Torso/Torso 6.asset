@@ -16,6 +16,6 @@ MonoBehaviour:
   pieceSprite: {fileID: 21300000, guid: 250530d3e9754ed418009e3d539275b3, type: 3}
   buyPrice: 100
   sellPrice: 50
-  owned: 1
+  owned: 0
   equipped: 0
   pieceType: 1

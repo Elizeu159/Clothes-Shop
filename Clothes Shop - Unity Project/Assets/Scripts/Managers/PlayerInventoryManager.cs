@@ -6,6 +6,18 @@ public class PlayerInventoryManager : MonoBehaviour
 {
     public List<ClothingPieceSettings> acquiredClothes = new List<ClothingPieceSettings>();
 
+    private void OnEnable()
+    {
+        ClothingStaticEvents.OnRequestedClothingBuy += AddClothing;
+        ClothingStaticEvents.OnRequestedClothingSell += RemoveClothing;
+    }
+
+    private void OnDisable()
+    {
+        ClothingStaticEvents.OnRequestedClothingBuy -= AddClothing;
+        ClothingStaticEvents.OnRequestedClothingSell -= RemoveClothing;
+    }
+
     public bool IsClothingOwned(ClothingPieceSettings clothingPiece)
     {
         return acquiredClothes.Contains(clothingPiece);

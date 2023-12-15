@@ -18,4 +18,4 @@ MonoBehaviour:
   sellPrice: 50
   owned: 1
   equipped: 1
-  pieceLocation: 0
+  pieceType: 0
