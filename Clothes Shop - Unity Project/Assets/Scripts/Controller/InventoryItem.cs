@@ -7,6 +7,7 @@ using TMPro;
 public class InventoryItem : MonoBehaviour
 {
     [SerializeField] private TMP_Text text;
+    [SerializeField] private Image icon;
     [SerializeField] private Button equipBttn;
     public ClothingPieceSettings clothingPieceType;
 
@@ -29,6 +30,10 @@ public class InventoryItem : MonoBehaviour
     {
         clothingPieceType = clothingPiece;
         text.text = clothingPieceType.pieceName;
+        icon.sprite = clothingPieceType.pieceSprite;
+        icon.type = Image.Type.Sliced;
+        icon.pixelsPerUnitMultiplier = 100;
+
         equipBttn.interactable = !clothingPieceType.equipped;
     }
 

@@ -11,6 +11,10 @@ public class ShopItem : MonoBehaviour
     [SerializeField] private Button buyBttn;
     [SerializeField] private Button sellBttn;
 
+    [SerializeField] private TMP_Text buyPrice;
+    [SerializeField] private TMP_Text sellPrice;
+
+    [SerializeField] private Image icon;
     [SerializeField] private GameObject equippedWarning;
 
     public ClothingPieceSettings clothingPieceType;
@@ -36,15 +40,19 @@ public class ShopItem : MonoBehaviour
     {
         clothingPieceType = clothingPiece;
         text.text = clothingPieceType.pieceName;
+        icon.sprite = clothingPieceType.pieceSprite;
+        icon.type = Image.Type.Sliced;
+        icon.pixelsPerUnitMultiplier = 100;
+
+        sellPrice.text = clothingPieceType.sellPrice.ToString();
+        buyPrice.text = clothingPieceType.buyPrice.ToString();
 
         equippedWarning.SetActive(clothingPieceType.equipped);
         tryBttn.gameObject.SetActive(!clothingPieceType.equipped);
-        buyBttn.gameObject.SetActive(!clothingPieceType.equipped);
-        sellBttn.gameObject.SetActive(!clothingPieceType.equipped);
+        buyBttn.gameObject.SetActive(!clothingPieceType.equipped && !clothingPieceType.owned);
+        sellBttn.gameObject.SetActive(!clothingPieceType.equipped && clothingPieceType.owned);
 
         tryBttn.interactable = !isAlreadyTrying;
-        buyBttn.interactable = !clothingPieceType.owned;
-        sellBttn.interactable = clothingPieceType.owned;
     }
 
     public void Try()
@@ -54,8 +62,8 @@ public class ShopItem : MonoBehaviour
 
     public void Buy()
     {
-        buyBttn.interactable = false;
-        sellBttn.interactable = true;
+        buyBttn.gameObject.SetActive(false);
+        sellBttn.gameObject.SetActive(true);
         ClothingStaticEvents.OnRequestedClothingBuy(clothingPieceType);
     }
 
@@ -66,8 +74,8 @@ public class ShopItem : MonoBehaviour
             return;
         }
 
-        buyBttn.interactable = true;
-        sellBttn.interactable = false;
+        buyBttn.gameObject.SetActive(true);
+        sellBttn.gameObject.SetActive(false);
         ClothingStaticEvents.OnRequestedClothingSell(clothingPieceType);
     }
 

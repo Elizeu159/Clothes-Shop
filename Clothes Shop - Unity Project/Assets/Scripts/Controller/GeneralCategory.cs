@@ -23,9 +23,9 @@ public class GeneralCategory : MonoBehaviour
 
     protected virtual void OnEnable()
     {
+        toggle.isOn = defaultOn;
         if (defaultOn)
         {
-            toggle.isOn = true;
             toggle.onValueChanged.Invoke(true);
             toggle.group.EnsureValidState();
         }
