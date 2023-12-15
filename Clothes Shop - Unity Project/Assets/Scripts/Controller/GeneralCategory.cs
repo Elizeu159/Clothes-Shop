@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GeneralCategory : MonoBehaviour
+public abstract class GeneralCategory : MonoBehaviour
 {
     public ClothingPieceTypes clothingType;
     public TMP_Text toggleText;
@@ -18,24 +18,19 @@ public class GeneralCategory : MonoBehaviour
 
     protected virtual void Start()
     {
-        toggleText.text = clothingType.ToString();
+        string correctedClothingTypeString = clothingType.ToString().Replace('_', ' ');
+        toggleText.text = correctedClothingTypeString;
     }
 
     protected virtual void OnEnable()
     {
         toggle.isOn = defaultOn;
-        if (defaultOn)
-        {
-            toggle.onValueChanged.Invoke(true);
+        toggle.onValueChanged.Invoke(defaultOn);
+        //if (defaultOn)
+        //{
             toggle.group.EnsureValidState();
-        }
+        //}
     }
 
-    protected virtual void OnChangedToggleState(bool state)
-    {
-        if (!state)
-        {
-            return;
-        }
-    }
+    protected abstract void OnChangedToggleState(bool state);
 }

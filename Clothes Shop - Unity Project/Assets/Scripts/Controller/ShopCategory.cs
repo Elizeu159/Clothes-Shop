@@ -25,7 +25,10 @@ public class ShopCategory : GeneralCategory
 
     protected override void OnChangedToggleState(bool state)
     {
-        base.OnChangedToggleState(state);
+        if (!state)
+        {
+            return;
+        }
         shopPanel.ShowPiecesOfType(clothingType);
     }
 }

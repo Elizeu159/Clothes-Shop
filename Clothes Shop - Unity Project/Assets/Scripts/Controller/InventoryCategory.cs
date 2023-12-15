@@ -25,7 +25,10 @@ public class InventoryCategory : GeneralCategory
 
     protected override void OnChangedToggleState(bool state)
     {
-        base.OnChangedToggleState(state);
+        if (!state)
+        {
+            return;
+        }
         inventory.ShowOwnedPiecesOfType(clothingType);
     }
 }
