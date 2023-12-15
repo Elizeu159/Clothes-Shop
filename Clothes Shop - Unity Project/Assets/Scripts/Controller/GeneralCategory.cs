@@ -26,10 +26,7 @@ public abstract class GeneralCategory : MonoBehaviour
     {
         toggle.isOn = defaultOn;
         toggle.onValueChanged.Invoke(defaultOn);
-        //if (defaultOn)
-        //{
-            toggle.group.EnsureValidState();
-        //}
+        toggle.group.EnsureValidState();
     }
 
     protected abstract void OnChangedToggleState(bool state);

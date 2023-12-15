@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class ShopPanel : MonoBehaviour
 {
     public GameManager gameManager;
@@ -11,6 +11,7 @@ public class ShopPanel : MonoBehaviour
     public Button closeBttn;
 
     public GameObject shopVisualizationHolder;
+    public TMP_Text moneyText;
 
     public ShopItem shopItemPrefab;
     public Transform shopItemsParent;
@@ -33,21 +34,28 @@ public class ShopPanel : MonoBehaviour
     {
         ClothingStaticEvents.OnRequestedClothingTry += OnRequestedClothingTry;
         ClothingStaticEvents.OnNearShopStateChanged += OnNearShopStateChanged;
+        PlayerData.OnMoneyChanged += OnMoneyChanged;
     }
 
     private void OnDisable()
     {
         ClothingStaticEvents.OnRequestedClothingTry -= OnRequestedClothingTry;
         ClothingStaticEvents.OnNearShopStateChanged -= OnNearShopStateChanged;
+        PlayerData.OnMoneyChanged -= OnMoneyChanged;
     }
 
     private void OpenShop()
     {
+        OnMoneyChanged(PlayerData.GetMoneyValue());
         allPreviewedPieces.Clear();
 
         ClothingStaticEvents.OnShopStateChanged(true);
         shopVisualizationHolder.SetActive(true);
+    }
 
+    private void OnMoneyChanged(int value)
+    {
+        moneyText.text = value.ToString();
     }
 
     private void CloseShop()

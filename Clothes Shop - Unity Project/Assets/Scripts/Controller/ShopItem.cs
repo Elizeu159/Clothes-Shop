@@ -62,8 +62,13 @@ public class ShopItem : MonoBehaviour
 
     public void Buy()
     {
+        if (PlayerData.GetMoneyValue() < clothingPieceType.buyPrice)
+        {
+            return;
+        }
         buyBttn.gameObject.SetActive(false);
         sellBttn.gameObject.SetActive(true);
+        PlayerData.ChangeMoneyValue(-clothingPieceType.buyPrice);
         ClothingStaticEvents.OnRequestedClothingBuy(clothingPieceType);
     }
 
@@ -76,6 +81,7 @@ public class ShopItem : MonoBehaviour
 
         buyBttn.gameObject.SetActive(true);
         sellBttn.gameObject.SetActive(false);
+        PlayerData.ChangeMoneyValue(+clothingPieceType.sellPrice);
         ClothingStaticEvents.OnRequestedClothingSell(clothingPieceType);
     }
 
