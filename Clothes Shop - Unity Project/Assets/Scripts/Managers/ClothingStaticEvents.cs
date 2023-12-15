@@ -8,5 +8,6 @@ public static class ClothingStaticEvents
     public static Action<ClothingPieceSettings> OnRequestedClothingSell;
 
     public static Action<bool> OnShopStateChanged;
-    public static Action<bool> OnInventoryStateChanged;
+
+    public static Action<bool> OnNearShopStateChanged;
 }

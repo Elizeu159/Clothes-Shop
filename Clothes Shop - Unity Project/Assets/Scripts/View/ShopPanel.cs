@@ -7,7 +7,9 @@ public class ShopPanel : MonoBehaviour
 {
     public GameManager gameManager;
 
-    public Button openCloseBttn;
+    public Button openBttn;
+    public Button closeBttn;
+
     public GameObject shopVisualizationHolder;
 
     public ShopItem shopItemPrefab;
@@ -18,22 +20,42 @@ public class ShopPanel : MonoBehaviour
 
     public List<ClothingPieceSettings> allPreviewedPieces = new List<ClothingPieceSettings>();
 
+    private void Awake()
+    {
+        gameManager = FindObjectOfType<GameManager>(true);
+        openBttn.onClick.AddListener(OpenShop);
+        closeBttn.onClick.AddListener(CloseShop);
+
+        openBttn.gameObject.SetActive(false);
+    }
+
     private void OnEnable()
     {
         ClothingStaticEvents.OnRequestedClothingTry += OnRequestedClothingTry;
-        ClothingStaticEvents.OnInventoryStateChanged += OnInventoryStateChanged;
+        ClothingStaticEvents.OnNearShopStateChanged += OnNearShopStateChanged;
     }
 
     private void OnDisable()
     {
         ClothingStaticEvents.OnRequestedClothingTry -= OnRequestedClothingTry;
-        ClothingStaticEvents.OnInventoryStateChanged -= OnInventoryStateChanged;
+        ClothingStaticEvents.OnNearShopStateChanged -= OnNearShopStateChanged;
     }
 
-    private void Awake()
+    private void OpenShop()
     {
-        gameManager = FindObjectOfType<GameManager>(true);
-        openCloseBttn.onClick.AddListener(ChangeShopActiveState);
+        allPreviewedPieces.Clear();
+
+        ClothingStaticEvents.OnShopStateChanged(true);
+        shopVisualizationHolder.SetActive(true);
+
+    }
+
+    private void CloseShop()
+    {
+        allPreviewedPieces.Clear();
+
+        ClothingStaticEvents.OnShopStateChanged(false);
+        shopVisualizationHolder.SetActive(false);
     }
 
     public void ShowPiecesOfType(ClothingPieceTypes clothing)
@@ -70,20 +92,9 @@ public class ShopPanel : MonoBehaviour
         }
     }
 
-    private void ChangeShopActiveState()
+    private void OnNearShopStateChanged(bool state)
     {
-        allPreviewedPieces.Clear();
-
-        bool isTurnedOn = shopVisualizationHolder.activeInHierarchy;
-
-        ClothingStaticEvents.OnShopStateChanged(!isTurnedOn);
-
-        shopVisualizationHolder.SetActive(!isTurnedOn);
-    }
-
-    private void OnInventoryStateChanged(bool state)
-    {
-        openCloseBttn.gameObject.SetActive(!state);
+        openBttn.gameObject.SetActive(state);
     }
 
     private void OnRequestedClothingTry(ClothingPieceSettings clothingPiece)

@@ -75,8 +75,6 @@ public class InventoryPanel : MonoBehaviour
     {
         bool isTurnedOn = inventoryVisualizationHolder.activeInHierarchy;
 
-        ClothingStaticEvents.OnInventoryStateChanged(!isTurnedOn);
-
         inventoryVisualizationHolder.SetActive(!isTurnedOn);
     }
 
